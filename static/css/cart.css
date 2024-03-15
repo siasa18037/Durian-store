@@ -1,0 +1,12 @@
+h1{
+    color: rgb(0, 0, 0);
+}
+
+.row .button_delet{
+    padding: 0;
+    border: none;
+    padding: 1px 2px;
+    background: none;
+    font-weight: 600;
+    
+}

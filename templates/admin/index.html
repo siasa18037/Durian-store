@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        h3{
+            text-align: center;
+            font-size:15px;
+        }
+        
+        a {
+            display: block;
+            margin: 10px 0;
+            text-align: center;
+            text-decoration: none;
+            color: #007bff;
+            transition: color 0.3s;
+        }
+        
+        a:hover {
+            color: #0056b3;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <h3>Admin email: {{  user_email }} | type: {{ user_type }}</h3>
+        
+        <a href="/admin/product">See All Products</a>
+        <a href="/admin/category">See All Categories</a>
+        <a href="/admin/promotion">See All Promotions</a>
+        <a href="/admin/customer">See All Customers</a>
+        <a href="/admin/order">All Orders</a>
+        <a href="/admin/help">All Help</a>
+        <a href="/logout">Logout</a>
+    </div>
+</body>
+</html>

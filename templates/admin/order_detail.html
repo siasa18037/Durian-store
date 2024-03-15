@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Details</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  .order-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .order-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .order-details p {
+    margin: 5px 0;
+  }
+  
+  .order-items {
+    margin-top: 20px;
+  }
+  
+  .order-item {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  .item-img {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+  }
+  
+  .item-details {
+    flex-grow: 1;
+  }
+  
+  .item-details h3 {
+    margin: 0;
+  }
+  
+  .order-status {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  #btn-confirm-order {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #btn-confirm-order:hover {
+    background-color: #0056b3;
+  }
+
+</style>
+</head>
+<body>
+  <div class="order-container">
+    <h1>Order Details</h1>
+    <div class="order-details">
+      <p><strong>Order ID:</strong> #{{ order.get_order_id() }}</p>
+      <p><strong>Order Date:</strong> {{ order.get_order_date() }}</p>
+      <p><strong>Name:</strong> {{ order.get_name() }}</p>
+      <p><strong>Phone:</strong> {{ order.get_phone() }}</p>
+      <p><strong>Address:</strong> {{ order.get_address() }}</p>
+      <p><strong>Total Price:</strong> {{ order.get_cart().get_amount() }}</p>
+      
+    </div>
+    <div class="order-items">
+      {% for product in cart.get_product_list() %}
+      <div class="order-item">
+        <img class="item-img" src="{{ product.get_product_img() }}" alt="Item Image">
+        <div class="item-details">
+          <h3>{{ product.get_product_name() }}</h3>
+          <p>Price: {{ product.get_product_amount() }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="order-status">
+      <h2>Order Status: {{ order.get_status_text() }}</h2>
+      {% if order.get_status() == 2 %}
+        <p><strong>tracking_number:</strong> {{ order.get_tracking_number() }}</p>
+        <p><strong>logistic:</strong> {{ order.get_logistic()}}</p>
+      {% endif %}
+      {% if order.get_status() == 1 %}
+      <form action="/admin/order/updatestatus" method="post">
+        <input type="hidden" value="{{ order.get_order_id() }}" name="order_id">
+        <label for="tracking_number">Tracking Number:</label>
+        <input type="text" id="tracking_number" name="tracking_number">
+        <br>
+        <label for="logistic">Logistic:</label>
+        <input type="text" id="logistic" name="logistic">
+        <br>
+        <button id="btn-confirm-order" type="submit">Confirm Order Delivery</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

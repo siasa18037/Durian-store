@@ -1,0 +1,323 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Untree.co">
+  <link rel="shortcut icon" href="../static/images/logo.png">
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="bootstrap, bootstrap4" />
+
+		<!-- Bootstrap CSS -->
+		<link href="../static/css/bootstrap.min.css" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+		<link href="../static/css/tiny-slider.css" rel="stylesheet">
+		<link href="../static/css/style.css" rel="stylesheet">
+		<title>Durian</title>
+
+    	<link href="../static/css/cart_detail.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+	</head>
+
+	<body>
+
+		<!-- Start Header/Navigation -->
+		<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+
+			<div class="container">
+				<a class="navbar-brand" href="/">Durian<span>.</span></a>
+
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarsFurni">
+					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+						<li>
+							<a class="nav-link" href="/">Home</a>
+						</li>
+						<li ><a class="nav-link" href="/product">Product</a></li>
+						<li><a class="nav-link" href="/category">Category</a></li>
+						<li><a class="nav-link" href="/promotion">Promotion</a></li>
+						<li><a class="nav-link" href="/help">Help</a></li>
+						<li><a class="nav-link" href="/contact.">Contact us</a></li>
+					</ul>
+
+					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+						<li><a class="nav-link" href="/account"><img src="../static/images/user.svg"></a></li>
+						<li><a class="nav-link" href="/cart"><img src="../static/images/cart.svg"></a></li>
+					</ul>
+				</div>
+			</div>
+				
+		</nav>
+		<!-- End Header/Navigation -->
+
+    
+    <div class="untree_co-section">
+      <div class="container">
+        <div class="row mb-5">
+
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-5 mb-md-0">
+            <h2 class="h3 mb-3 text-black">Address Details</h2>
+            <div class="p-3 p-lg-5 border bg-white">
+              <h5>เลือกที่อยู่จัดส่ง</h5>
+              <div class="address-list">
+                {% for address in customer.get_address_list() %}
+            
+                  
+                  <div class="address-item"  onclick="selectAddress('{{address.get_address_homeid_detail()}}, {{address.get_address_sub_area()}}, {{address.get_address_district()}}, {{address.get_address_province()}}, {{address.get_address_postcode()}}','{{address.get_address_name()}}' , '{{address.get_address_phone()}}' ,event)">
+                    <p>{{address.get_address_name()}} | {{address.get_address_phone()}}</p>
+                    <p>{{address.get_address_homeid_detail()}}, {{address.get_address_sub_area()}}, {{address.get_address_district()}}, {{address.get_address_province()}}, {{address.get_address_postcode()}}</p>
+                    <form action="/address/delete" method="post">
+                      <input type="hidden" name="address_id" value="{{ address.get_address_id() }}">
+					  <input type="hidden" name="page" value="cart">
+                      <button>ลบ</button>
+
+                    </form>
+                  </div>
+                
+            
+                  {% endfor %}
+                
+              </div>
+              <a href="/address?page=cart" class="btn btn-sm btn-lg py-1 btn-block" >เพิ่มที่อยู่</a>
+              
+            </div>
+          </div>
+          <div class="col-md-6">
+
+            <div class="row mb-5">
+              <div class="col-md-12">
+                <h2 class="h3 mb-3 text-black">Your Order</h2>
+                <div class="p-3 p-lg-5 border bg-white">
+                  <table class="table site-block-order-table mb-5">
+                    <thead>
+                      <th>Product</th>
+                      <th>Total</th>
+                    </thead>
+                    <tbody>
+
+                      
+                      {% for product in customer.search_cart_from_status().get_product_list() %}
+                        <tr>
+                          <td>{{product.get_product_name()}} </td>
+                          <td class="product-price">{{product.get_product_amount()}}</td>
+                        </tr>
+                      {% endfor %}
+                      {% if customer.search_cart_from_status().get_promotion_list() == []%}
+                      {% else %}
+                        {% for promotion in customer.search_cart_from_status().get_promotion_list() %}
+                        <tr>
+                          <td>ลด {{promotion.get_promotion_name()}} </td>
+                          <td>- {{ promotion.get_calculate_rate()*100 }} %</td>
+                        </tr>  
+                        {% endfor %}
+                      {% endif %}
+                    
+                      <tr>
+                        <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
+                        <td class="text-black font-weight-bold"><strong class="product-price ">{{total_amount}}</strong></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  
+                  <div class="form-group">
+                   
+                    <form action="/MakeOrder" method="post" id="Form">
+                      <input type="hidden" name="address" value="" >
+                      <input type="hidden" name="name" value="" >
+                      <input  type="hidden" name="phone" value="" >
+                      <input type="hidden" name="customer_id" value="{{ customer.get_customer_id() }}">
+                      
+                      <button id="checkoutBtn" type="submit" class="btn btn-black btn-lg py-3 btn-block" style="display: none;">Checkout</button>
+            
+            
+                    </form> 
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- </form> -->
+      </div>
+    </div>
+    
+
+		
+
+		<!-- Start Footer Section -->
+		<footer class="footer-section">
+			<div class="container relative">	
+
+				<div class="row g-5 mb-5">
+					<div class="col-lg-4">
+						<div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Durian<span>.</span></a></div>
+						<p class="mb-4">Durian by E3 DEV and siasa groups </p>
+
+						<ul class="list-unstyled custom-social">
+							<li><a href="https://web.facebook.com/"><span class="fa fa-brands fa-facebook-f"></span></a></li>
+							<li><a href="#"><span class="fa fa-brands fa-twitter"></span></a></li>
+							<li><a href="#"><span class="fa fa-brands fa-instagram"></span></a></li>
+						</ul>
+					</div>
+
+					<div class="col-lg-8">
+						<div class="row links-wrap">
+							<div class="col-6 col-sm-6 col-md-3">
+								<ul class="list-unstyled">
+									<li><a href="/aboutus">About us</a></li>
+									<li><a href="/help">Help</a></li>
+									<li><a href="/contact_us">Contact_us</a></li>
+								</ul>
+							</div>
+
+							<div class="col-6 col-sm-6 col-md-3">
+								<ul class="list-unstyled">
+									<li><a href="/account">Account</a></li>
+									<li><a href="/login">Login</a></li>
+									<li><a href="/signup">Sign Up</a></li>
+								</ul>
+							</div>
+
+							<div class="col-6 col-sm-6 col-md-3">
+								<ul class="list-unstyled">
+									<li><a href="/product">product</a></li>
+									<li><a href="/category">Category</a></li>
+									<li><a href="/promotion">Promotion</a></li>
+								</ul>
+							</div>
+
+							<div class="col-6 col-sm-6 col-md-3">
+								<ul class="list-unstyled">
+									<li><a href="/cart">Cart</a></li>
+									<li><a href="/order">Order</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="border-top copyright">
+					<div class="row pt-4">
+						<div class="col-lg-6">
+							<p class="mb-2 text-center text-lg-start">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed by <a href="#">E3 DEV</a> Distributed By <a hreff="https://themewagon.com">siasa groups</a>  </p>
+						</div>
+
+						<div class="col-lg-6 text-center text-lg-end">
+							<ul class="list-unstyled d-inline-flex ms-auto">
+								<li class="me-4"><a href="#">Terms &amp; Conditions</a></li>
+								<li><a href="#">Privacy Policy</a></li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</footer>
+		<!-- End Footer Section -->	
+
+
+    
+
+
+    <script>
+      function selectAddress(addressId, name , phone ,event) {
+        var addressInput = document.getElementById('Form').querySelector('[name="address"]');
+        var nameInput = document.getElementById('Form').querySelector('[name="name"]');
+        var phoneInput = document.getElementById('Form').querySelector('[name="phone"]');
+        if (addressId === 'none') {
+          addressInput.value = 'none';
+          nameInput.value = 'none';
+          phoneInput.value = 'none';
+        } else {
+          addressInput.value = addressId;
+          nameInput.value = name;
+          phoneInput.value = phone;
+        }
+        
+        var addressItems = document.querySelectorAll('.address-item');
+        addressItems.forEach(function(item) {
+          item.classList.remove('selected');
+        });
+        
+        if (addressId !== 'none') {
+          event.currentTarget.classList.add('selected');
+          // Show checkout button
+          document.getElementById('checkoutBtn').style.display = 'block';
+        } else {
+          // Hide checkout button
+          document.getElementById('checkoutBtn').style.display = 'none';
+        }
+      }
+    </script>
+
+    <script>
+			// เลือกอิลิเมนต์ที่มีคลาส "product-price"
+			var productPriceElements = document.querySelectorAll('.product-price');
+
+			// วนลูปผ่านทุกอิลิเมนต์ที่เลือก
+			productPriceElements.forEach(function(element) {
+				// ดึงข้อความที่อยู่ในอิลิเมนต์
+				var priceText = element.innerText;
+
+				// แปลงข้อความเป็นตัวเลข
+				var price = parseFloat(priceText.replace('฿', '').replace(',', ''));
+
+				// รูปแบบข้อความใหม่ที่มีคอมม่า
+				var formattedPrice = '฿' + price.toLocaleString();
+
+				// แสดงราคาที่มีรูปแบบใหม่ในอิลิเมนต์
+				element.innerText = formattedPrice;
+			});
+
+
+
+			const params = new URLSearchParams(window.location.search);
+			const act = params.get('act');
+
+			const Toast = Swal.mixin({
+				toast: true,
+				position: 'top-end',
+				showConfirmButton: false,
+				timer: 4000,
+				timerProgressBar: true,
+				didOpen: (toast) => {
+					toast.addEventListener('mouseenter', Swal.stopTimer)
+					toast.addEventListener('mouseleave', Swal.resumeTimer)
+				}
+				})
+			
+			if (act === 'Cart_error') {
+				Toast.fire({
+					icon: 'error',
+					title: 'Make Order Error'
+					})
+
+
+		</script>
+
+
+		<script src="../static/js/bootstrap.bundle.min.js"></script>
+		<script src="../static/js/tiny-slider.js"></script>
+		<script src="../static/js/custom.js"></script>
+	</body>
+
+</html>

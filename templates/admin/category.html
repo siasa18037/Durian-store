@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>category List</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+    <style>
+        /* Customize DataTables pagination */
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            padding: 0.5em 0.8em;
+            margin-left: 5px;
+            border-radius: 0.25em;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+        }
+        
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background-color: #0056b3;
+        }
+        
+        /* Add hover effect to table rows */
+        table.dataTable tbody tr:hover {
+            background-color: #f2f2f2;
+        }
+        
+        /* Customize table header */
+        table.dataTable thead th {
+            background-color: #007bff;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        /* Customize table cell padding and text alignment */
+        table.dataTable tbody td {
+            padding: 10px;
+            text-align: center;
+        }
+        
+        /* Set table border */
+        table.dataTable {
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        /* Set container max-width and center content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Set h1 font size and margin */
+        h1 {
+            font-size: 24px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+    
+            /* CSS for category form */
+            .container_input {
+                max-width: 500px;
+                margin: 50px auto;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+        
+            .container_input h2 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+        
+            .container_input label {
+                display: block;
+                margin-bottom: 8px;
+            }
+        
+            .container_input input[type="text"],
+            .container_input textarea {
+                width: calc(100% - 20px);
+                padding: 10px;
+                margin-bottom: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+        
+            .container_input input[type="submit"] {
+                width: 100%;
+                padding: 10px;
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+        
+            .container_input input[type="submit"]:hover {
+                background-color: #0056b3;
+            }
+        </style>
+        
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Category List</h1>
+        <table id="category-table" class="display">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>detail</th>
+                    <th>ลบ</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in category_list %}
+                <tr>
+                    <td>{{category.get_category_id()}}</td>
+                    <td>{{category.get_category_name()}}</td>
+                    <td>{{category.get_category_detail()}}</td>
+                    <td>
+                        <form action="/admin/category/delete" method="post">
+                            <input type="hidden" name="category_id" value="{{category.get_category_id()}}">
+                            <input type="submit"  value="ลบ">
+                        </form>
+                    </td>
+                </tr>
+              
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container_input">
+        <h2>Add Category</h2>
+        <form action="/admin/category" method="post">
+            
+            <label for="category_name">Category Name:</label>
+            <input type="text" id="category_name" name="category_name" required>
+            
+            <label for="category_detail">Category Detail:</label>
+            <textarea id="category_detail" name="category_detail" required></textarea>
+
+            <label for="category_img">Category img:</label>
+            <input type="text" id="category_img" name="category_img" required>
+            
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#category-table').DataTable();
+        });
+    </script>
+</body>
+</html>

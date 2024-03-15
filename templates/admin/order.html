@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>order List</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+    <style>
+        /* Customize DataTables pagination */
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            padding: 0.5em 0.8em;
+            margin-left: 5px;
+            border-radius: 0.25em;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+        }
+        
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background-color: #0056b3;
+        }
+        
+        /* Add hover effect to table rows */
+        table.dataTable tbody tr:hover {
+            background-color: #f2f2f2;
+        }
+        
+        /* Customize table header */
+        table.dataTable thead th {
+            background-color: #007bff;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        /* Customize table cell padding and text alignment */
+        table.dataTable tbody td {
+            padding: 10px;
+            text-align: center;
+        }
+        
+        /* Set table border */
+        table.dataTable {
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        /* Set container max-width and center content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Set h1 font size and margin */
+        h1 {
+            font-size: 24px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Order List</h1>
+        <table id="order-table" class="display">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Name</th>
+                    <th>จำนวนเงิน</th>
+                    <th>Order Date</th>
+                    <th>status</th>
+                    <th>seemore</th>
+                    <th>ยกเลิก</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in order_list %}
+                <tr>
+                    <td>{{order.get_order_id()}}</td>
+                    <td>{{order.get_name()}}</td>
+                    <td>{{order.get_cart().get_amount()}}</td>
+                    <td>{{order.get_order_date()}}</td>
+                    <td>{{order.get_status_text()}}</td>
+                    <td><a href="/admin/order/{{order.get_order_id()}}">seemore</a></td>
+                    <td>
+                        <form action="/admin/order/cancel" method="post">
+                            <input type="hidden" name="order_id" value="{{order.get_order_id()}}">
+                            <input type="submit"  value="ยกเลิก">
+                        </form>
+                    </td>
+                </tr>
+              
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#order-table').DataTable();
+        });
+    </script>
+</body>
+</html>

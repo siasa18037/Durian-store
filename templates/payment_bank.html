@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bank Transfer Payment Details</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  .payment-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  .payment-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4CAF50;
+  }
+  
+  .payment-details {
+    padding: 0 20px;
+    text-align: center;
+  }
+  
+  .payment-details img {
+    max-width: 200px;
+    margin-bottom: 20px;
+  }
+  
+  .payment-details p {
+    margin: 10px 0;
+    font-size: 16px;
+  }
+  
+  .payment-details p strong {
+    margin-right: 10px;
+    font-weight: bold;
+    color: #4CAF50;
+  }
+  
+  .order-number {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: #4CAF50;
+  }
+  
+  .payment-button {
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .payment-button:hover {
+    background-color: #45a049;
+  }
+</style>
+</head>
+<body>
+  <div class="payment-container">
+    <h1>Bank Transfer Payment Details</h1>
+    <div class="payment-details">
+      <img src="{{ payment.get_img() }}" alt="Bank Logo">
+      <p><strong>Account Name:</strong> {{ payment.get_payment_detail() }}</p>
+      <p><strong>Account Number:</strong> {{ payment.get_payment_id_bank() }}</p>
+      <p><strong>จำนวนเงิน:</strong> {{ order_amount }} บาท</p>
+    </div>
+    <p class="order-number">เลขคำสั่งซื้อ: #{{ order.get_order_id() }}</p>
+    <form action="/payment" method="post">
+      <input type="hidden" name="customer_id" value="{{ customer.get_customer_id() }}">
+      <input type="hidden" name="order_id" value="{{ order.get_order_id() }}">
+      <input type="hidden" name="payment_id" value="{{ payment.get_payment_id() }}">
+      <button type="submit" class="payment-button">โอนเงินแล้ว</button>
+    </form>
+  </div>
+</body>
+</html>

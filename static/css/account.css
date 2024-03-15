@@ -1,0 +1,39 @@
+.address-list {
+    margin-bottom: 20px;
+  }
+
+
+  .address-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: rgb(60, 60, 60);
+  }
+
+  .address-item button {
+        padding: 0;
+        border: none;
+        padding: 1px 2px;
+        background: none;
+        font-weight: 600;
+        
+    }
+
+
+
+  
+  .address-item.selected {
+    border: 2px solid #d79a00;
+    background-color: #f0f0f0;
+  }
+
+
+  #btn-logout {
+    padding: 5px 10px; /* ปรับขนาดของปุ่ม */
+    background-color: transparent; /* กำหนดให้ไม่มีสีพื้นหลัง */
+    border: 1px solid #6c757d; /* กำหนดเส้นขอบ */
+    color: #6c757d; /* กำหนดสีข้อความ */
+  }

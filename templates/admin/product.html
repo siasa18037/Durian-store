@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+    <style>
+        /* Customize DataTables pagination */
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            padding: 0.5em 0.8em;
+            margin-left: 5px;
+            border-radius: 0.25em;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+        }
+        
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background-color: #0056b3;
+        }
+        
+        /* Add hover effect to table rows */
+        table.dataTable tbody tr:hover {
+            background-color: #f2f2f2;
+        }
+        
+        /* Customize table header */
+        table.dataTable thead th {
+            background-color: #007bff;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        /* Customize table cell padding and text alignment */
+        table.dataTable tbody td {
+            padding: 10px;
+            text-align: center;
+        }
+        
+        /* Set table border */
+        table.dataTable {
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        /* Set container max-width and center content */
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+        
+        /* Set h1 font size and margin */
+        h1 {
+            font-size: 24px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .container_input {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        textarea {
+            width: calc(100% - 20px);
+            height: 100px;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            background-color: white;
+            appearance: none; /* Removes default arrow icon */
+        }
+    
+        /* Style for options */
+        option {
+            padding: 10px;
+            font-size: 16px;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Product List</h1>
+        <table id="product-table" class="display">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Category</th>
+                    <th>Name</th>
+                    <th>วันเปิดตัว</th>
+                    <th>จำนวน</th>
+                    <th>Price</th>
+                    <th>เเก้ไข</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for product in product_list%}
+                <tr>
+                    <td>{{product.get_product_id()}}</td>
+                    <td>{{product.get_product_category().get_category_name()}}</td>
+                    <td>{{product.get_product_name()}}</td>
+                    <td>{{product.get_product_date_opening()}}</td>
+                    <td>{{product.get_product_quantity()}}</td>
+                    <td>{{product.get_product_amount()}}</td>
+                    <td><a href="product/{{product.get_product_id()}}">เเก้ไข</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container_input">
+        <h2>Add Product</h2>
+        <form action="/admin/product" method="post">
+            
+            <label for="product_category">Product Category: </label>
+            <select id="product_category_id" name="product_category_id" required>
+                {% for category in category_list %}
+                <option value="{{category.get_category_id()}}">{{category.get_category_name()}}</option>
+                {% endfor %}
+            </select>
+
+            
+            <label for="product_name">Product Name:</label>
+            <input type="text" id="product_name" name="product_name" required>
+            
+            <label for="product_detail">Product Detail:</label>
+            <textarea rows="10" id="product_detail" name="product_detail" required></textarea>
+            
+            <label for="product_amount">Product Amount:</label>
+            <input type="number" id="product_amount" name="product_amount" required>
+            
+            <label for="product_date_opening">Product Date Opening:</label>
+            <input type="date" id="product_date_opening" name="product_date_opening" required>
+            
+            <label for="product_quantity">Product Quantity:</label>
+            <input type="number" id="product_quantity" name="product_quantity" required>
+            
+            <label for="product_img">Product Image URL:</label>
+            <input type="text" id="product_img" name="product_img" required>
+            
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#product-table').DataTable();
+        });
+    </script>
+</body>
+</html>

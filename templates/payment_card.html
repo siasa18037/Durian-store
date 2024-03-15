@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .container {
+        width: 80%;
+        max-width: 500px;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+    
+    form {
+        margin-top: 20px;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    input[type="text"] {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    button:hover {
+        background-color: #45a049;
+    }
+    
+    button:active {
+        background-color: #45a049;
+    }
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Payment Details</h2>
+        <img width="100px" src="{{ payment.get_img() }}">
+        <form action="#">
+            <label for="cardNumber">Card Number:</label>
+            <input type="text" id="cardNumber" name="cardNumber" placeholder="Enter card number" >
+            <label for="expDate">Expiration Date:</label>
+            <input type="text" id="expDate" name="expDate" placeholder="MM/YYYY" >
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" placeholder="CVV" >
+            <label for="name">Cardholder's Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter cardholder's name" >
+        </form>
+        <form action="/payment" method="post">
+            <input type="hidden" name="customer_id" value="{{ customer.get_customer_id() }}" >
+            <input type="hidden" name="order_id" value="{{ order.get_order_id() }}">
+            <input type="hidden" name="payment_id" value="{{ payment.get_payment_id() }}">
+            <button type="submit">Pay Now</button>
+        </form>
+    </div>
+</body>
+</html>

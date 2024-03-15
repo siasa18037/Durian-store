@@ -1,0 +1,40 @@
+.address-list {
+    margin-bottom: 20px;
+  }
+
+
+  .address-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: rgb(60, 60, 60);
+  }
+
+  .address-item button {
+        padding: 0;
+        border: none;
+        padding: 1px 2px;
+        background: none;
+        font-weight: 600;
+        
+        
+    }
+
+
+  .address-item:hover {
+    background-color: #f0f0f0;
+  }
+
+
+  .address-item:hover {
+    background-color: #f0f0f0; /* เปลี่ยนสีพื้นหลังเมื่อเอาเมาส์ไป hover */
+    cursor: pointer; /* เปลี่ยนเคอร์เซอร์เป็นรูปแบบของการเลือก */
+  }
+  
+  .address-item.selected {
+    border: 2px solid #d79a00;
+    background-color: #f0f0f0;
+  }

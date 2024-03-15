@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+    <style>
+        /* CSS for edit product form */
+        .container_input {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container_input h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container_input label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .container_input select,
+        .container_input input[type="text"],
+        .container_input textarea,
+        .container_input input[type="number"],
+        .container_input input[type="date"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .container_input input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .container_input input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container_input">
+        <h2>Edit Product</h2>
+        <form action="/admin/product/edit" method="post">
+            <input type="hidden" id="product_id" name="product_id" value="{{ product.get_product_id() }}" required >
+
+            <label for="product_category">Product Category: (Old : {{ product.get_product_category().get_category_name() }})</label>
+            <select id="product_category_id" name="product_category_id" required>
+                {% for category in category_list %}
+                <option value="{{category.get_category_id()}}">{{category.get_category_name()}}</option>
+                {% endfor %}
+            </select>
+            
+            <label for="product_name">Product Name:</label>
+            <input type="text" id="product_name" name="product_name" value="{{ product.get_product_name() }}" required>
+            
+            <label for="product_detail">Product Detail:</label>
+            <textarea id="product_detail" name="product_detail"  required>{{ product.get_product_detail() }}</textarea>
+            
+            <label for="product_amount">Product Amount:</label>
+            <input type="number" id="product_amount" name="product_amount" value="{{ product.get_product_amount() }}" required>
+            
+            <label for="product_date_opening">Product Date Opening: (old : {{ product.get_product_date_opening() }})</label>
+            <input type="date" id="product_date_opening" name="product_date_opening" required>
+            
+            <label for="product_quantity">Product Quantity:</label>
+            <input type="number" id="product_quantity" name="product_quantity" value="{{ product.get_product_quantity() }}" required>
+            
+            <label for="product_img">Product Image URL:</label>
+            <input type="text" id="product_img" name="product_img" value="{{ product.get_product_img() }}" required>
+            
+            <input type="submit" value="Submit">
+        </form>
+        
+    </div>
+    <div class="container_input">
+        <form action="/admin/product/delete" method="post">
+            <input type="hidden" name="product_id" value="{{product.get_product_id()}}">
+            <input type="submit"  value="ลบ">
+        </form>
+    </div>
+    
+</body>
+</html>

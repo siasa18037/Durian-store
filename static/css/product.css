@@ -1,0 +1,55 @@
+.hero_product {
+    padding: 20px 0; /* ปรับขนาดของพื้นที่ใน hero_product */
+}
+
+.hero_product .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hero_product .head h1 {
+    color: #333; /* เปลี่ยนสีข้อความตามที่ต้องการ */
+    margin: 0; /* ลบระยะห่างของข้อความ */
+}
+
+.hero_product .search-container {
+    position: relative;
+    
+}
+
+.hero_product .search-container input[type="text"] {
+    width: 500px;
+    padding: 6px; /* ปรับขนาดของช่องค้นหา */
+    border: 1px solid #ffc107; /* เปลี่ยนสีขอบช่องค้นหา */
+    border-radius: 5px; /* เพิ่มมุมให้เรียบของช่องค้นหา */
+    padding-right: 30px; /* เพิ่มพื้นที่ข้างขวาของช่องค้นหาเพื่อให้ไอคอนค้นหาอยู่ */
+}
+
+.hero_product .search-container input[type="text"]:focus {
+    outline: none;
+}
+
+.hero_product .search-container i.fa {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffa600; /* เปลี่ยนสีไอคอนค้นหา */
+}
+
+
+
+@media (max-width: 800px){
+    .hero_product .search-container input[type="text"] {
+        width: 300px;
+        padding: 3px; /* ปรับขนาดของช่องค้นหา */
+        border: 1px solid #ffc107; /* เปลี่ยนสีขอบช่องค้นหา */
+        border-radius: 5px; /* เพิ่มมุมให้เรียบของช่องค้นหา */
+        padding-right: 30px; /* เพิ่มพื้นที่ข้างขวาของช่องค้นหาเพื่อให้ไอคอนค้นหาอยู่ */
+    }
+    
+}
+
+
+  

@@ -1,0 +1,7 @@
+#btn-cancel-order {
+    padding: 5px 10px; /* ปรับขนาดของปุ่ม */
+    background-color: transparent; /* กำหนดให้ไม่มีสีพื้นหลัง */
+    border: 1px solid #6c757d; /* กำหนดเส้นขอบ */
+    color: #6c757d; /* กำหนดสีข้อความ */
+  }
+

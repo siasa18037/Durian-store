@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment with QR Code</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  .payment-container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 10px;
+  }
+  
+  .payment-container h1 {
+    margin-top: 0;
+    color: #4CAF50;
+  }
+  
+  #qr-code {
+    margin: 20px auto;
+  }
+
+  #qr-code img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  #bank-logo {
+    max-width: 100px;
+    margin-top: 20px;
+  }
+
+  .payment-amount {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+  }
+
+  .payment-button {
+    margin-top: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .payment-button:hover {
+    background-color: #45a049;
+  }
+</style>
+</head>
+<body>
+  <div class="payment-container">
+    <h1>Payment with QR Code</h1>
+    <p>Scan the QR code below to make the payment.</p>
+    <div id="qr-code">
+      <img src="https://promptpay.io/{{ payment.get_payment_id_bank() }}/{{ order_amount }}.png" alt="QR Code">
+    </div>
+    <img id="bank-logo" src="{{ payment.get_img() }}" alt="Bank Logo">
+    <p class="payment-amount">จำนวน: {{ order_amount }} บาท</p>
+    <p class="order-number">เลขคำสั่งซื้อ: #{{ order.get_order_id() }}</p>
+    <form action="/payment" method="post">
+        <input type="hidden" name="customer_id" value="{{ customer.get_customer_id() }}">
+        <input type="hidden" name="order_id" value="{{ order.get_order_id() }}">
+        <input type="hidden" name="payment_id" value="{{ payment.get_payment_id() }}">
+        <button type="submit" class="payment-button">ชำระแล้ว</button>
+    </form>
+  </div>
+</body>
+</html>

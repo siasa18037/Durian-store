@@ -1,0 +1,18 @@
+.hero_category {
+    padding: 20px 0; /* ปรับขนาดของพื้นที่ใน hero_product */
+}
+
+.hero_category .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hero_category .head h1 {
+    color: #333; /* เปลี่ยนสีข้อความตามที่ต้องการ */
+    margin: 0; /* ลบระยะห่างของข้อความ */
+}
+
+.hero_categoryt .search-container {
+    position: relative;
+}

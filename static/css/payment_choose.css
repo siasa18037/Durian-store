@@ -1,0 +1,38 @@
+.grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.container .payment-method {
+
+    width: 200px ;
+    height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .payment-method img {
+    max-width: 150px;
+    max-height: 150px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+
+
+
+
+  .container .payment-method:hover {
+    border-color: #ffae00;
+    box-shadow: 0 0 10px #ffae00;
+    cursor: pointer;
+  }
+
+ 

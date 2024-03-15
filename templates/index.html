@@ -1,0 +1,345 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Untree.co">
+  <link rel="shortcut icon" href="../static/images/logo.png">
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="bootstrap, bootstrap4" />
+
+		<!-- Bootstrap CSS -->
+		<link href="../static/css/bootstrap.min.css" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+		<link href="../static/css/tiny-slider.css" rel="stylesheet">
+		<link href="../static/css/style.css" rel="stylesheet">
+		<title>Durian</title>
+	</head>
+
+	<body>
+
+		<!-- Start Header/Navigation -->
+		<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+
+			<div class="container">
+				<a class="navbar-brand" href="/">Durian<span>.</span></a>
+
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarsFurni">
+					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+						<li class="nav-item active">
+							<a class="nav-link" href="/">Home</a>
+						</li>
+						<li><a class="nav-link" href="/product">Product</a></li>
+						<li><a class="nav-link" href="/category">Category</a></li>
+						<li><a class="nav-link" href="/promotion">Promotion</a></li>
+						<li><a class="nav-link" href="/help">Help</a></li>
+						<li><a class="nav-link" href="/contact.">Contact us</a></li>
+					</ul>
+
+					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+						<li><a class="nav-link" href="/account"><img src="../static/images/user.svg"></a></li>
+						<li><a class="nav-link" href="/cart"><img src="../static/images/cart.svg"></a></li>
+					</ul>
+				</div>
+			</div>
+				
+		</nav>
+		<!-- End Header/Navigation -->
+
+		<!-- Start Hero Section -->
+			<div class="hero">
+				<div class="container">
+					<div class="row justify-content-between">
+						<div class="col-lg-5">
+							<div class="intro-excerpt">
+								<h1>Durian <span clsas="d-block">Store</span></h1>
+								<p class="mb-4">The best store in Thailand</p>
+								<p><a href="/product" class="btn btn-secondary me-2">Shop Now</a></p>
+							</div>
+						</div>
+						<div class="col-lg-7">
+							<div class="hero-img-wrap">
+								<img src="../static/images/couch.png" class="img-fluid">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- End Hero Section -->
+
+		<!-- Start Product Section -->
+		<div class="product-section">
+			<div class="container">
+				<div class="row">
+
+					<!-- Start Column  -->
+					<div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+						<h2 class="mb-4 section-title">Store.<span clsas="d-block">The best way to buy the products you love.</span></h2>
+						<p class="mb-4">Durian ตัวแทนจำหน่ายสินค้า Apple</p>
+						<p><a href="/product" class="btn">See Product</a></p>
+					</div> 
+					<!-- End Column -->
+
+                    {% for product in product_list_3item %}
+                    <!-- Start Column  -->
+                    <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                        <a class="product-item" href="/product/{{ product.get_product_name() }}">
+                            <img src="{{ product.get_product_img() }}" class="img-fluid product-thumbnail">
+                            <h3 class="product-title">{{ product.get_product_name() }}</h3>
+                            <strong class="product-price">฿{{ product.get_product_amount() }} </strong>
+                            <span class="icon-cross">
+                                <img src="../static/images/cross.svg" class="img-fluid">
+                            </span>
+                        </a>
+                    </div> 
+                    <!-- End Column  -->
+                    {% endfor %}
+
+					
+
+				</div>
+			</div>
+		</div>
+		<!-- End Product Section -->
+
+		<!-- Start Why Choose Us Section -->
+		<div class="why-choose-section">
+			<div class="container">
+				<div class="row justify-content-between">
+					<div class="col-lg-6">
+						<h2 class="section-title">Why Choose Us</h2>
+						<p>Durian ตัวแทนจำหน่ายสินค้า Apple พร้อมโปรโมชั่นส่วนลด สามารถสั่งสินค้าออนไลน์ได้ง่ายๆ ในราคาพิเศษ  ชอป Apple Watch ที่ Durian Online ได้อย่างมั่นใจ ด้วยศูนย์ซ่อมและบริการสินค้า Apple จากผู้เชี่ยวชาญ “DurianCare” ทั่วประเทศใกล้บ้านคุณ</p>
+
+						<div class="row my-5">
+							<div class="col-6 col-md-6">
+								<div class="feature">
+									<div class="icon">
+										<img src="../static/images/truck.svg" alt="Image" class="imf-fluid">
+									</div>
+									<h3>Fast &amp; Free Shipping</h3>
+									<p>เรามีบริการจัดส่งที่รวดเร็วและฟรีสำหรับการสั่งซื้อของคุณ เพื่อให้คุณได้รับสินค้าของคุณได้อย่างรวดเร็วและสะดวกสบายที่สุด</p>
+								</div>
+							</div>
+
+							<div class="col-6 col-md-6">
+								<div class="feature">
+									<div class="icon">
+										<img src="../static/images/bag.svg" alt="Image" class="imf-fluid">
+									</div>
+									<h3>Easy to Shop</h3>
+									<p>เรามุ่งมั่นที่จะทำให้การช้อปปิ้งของคุณเป็นเรื่องง่ายดายที่สุด ด้วยประสบการณ์ที่ไม่ซับซ้อนและการจัดเรียงที่ชัดเจน </p>
+								</div>
+							</div>
+
+							<div class="col-6 col-md-6">
+								<div class="feature">
+									<div class="icon">
+										<img src="../static/images/support.svg" alt="Image" class="imf-fluid">
+									</div>
+									<h3>24/7 Support</h3>
+									<p>เมื่อคุณต้องการความช่วยเหลือ ไม่ต้องกังวล เรามีทีมงานที่พร้อมให้บริการคุณตลอด 24 ชั่วโมง 7 วันต่อสัปดาห์ </p>
+								</div>
+							</div>
+
+							<div class="col-6 col-md-6">
+								<div class="feature">
+									<div class="icon">
+										<img src="../static/images/return.svg" alt="Image" class="imf-fluid">
+									</div>
+									<h3>NO Returns</h3>
+									<p>เพื่อให้คุณมั่นใจได้ว่าการช้อปปิ้งกับเราเป็นเรื่องที่ปลอดภัยและสะดวกสบายที่สุด</p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="col-lg-5">
+						<div class="img-wrap">
+							<img src="../static/images/why-choose-us-img.png" alt="Image" class="img-fluid">
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- End Why Choose Us Section -->
+
+		<!-- Start We Help Section -->
+		<div class="we-help-section">
+			<div class="container">
+				<div class="row justify-content-between">
+					<div class="col-lg-7 mb-5 mb-lg-0">
+						<div class="imgs-grid">
+							<div class="grid grid-1"><img src="../static/images/img-grid-1.jpg" alt="Untree.co"></div>
+							<div class="grid grid-2"><img src="../static/images/img-grid-2.jpg" alt="Untree.co"></div>
+							<div class="grid grid-3"><img src="../static/images/img-grid-3.jpg" alt="Untree.co"></div>
+						</div>
+					</div>
+					<div class="col-lg-5 ps-lg-5">
+						<h2 class="section-title mb-4">Good for you </br> Good for the world</h2>
+						<p>บริษัทของเราดำเนินงานโดยมีความเป็นกลางทางคาร์บอนอยู่แล้ว
+							และเรากำลังเดินหน้าเพื่อทำให้ผลิตภัณฑ์ทั้งหมดของเรามีความเป็นกลางทางคาร์บอนภายในปี 2030 ดูเพิ่มเติมเกี่ยวกับความพยายามล่าสุดของเราในการลดคาร์บอนฟุตพริ้นต์ที่เหลือ ต่อสู้กับการเปลี่ยนแปลงสภาพภูมิอากาศ และสนับสนุนความเสมอภาค</p>
+
+						<ul class="list-unstyled custom-list my-4">
+							<li>High security</li>
+							<li>Fast delivery</li>
+							<li>Save the world</li>
+							<li>Save of you</li>
+						</ul>
+						<a herf="https://www.apple.com/th/environment/" class="btn">Explore</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End We Help Section -->
+
+		
+
+		
+
+		<!-- Start Footer Section -->
+		<footer class="footer-section">
+			<div class="container relative">	
+
+				<div class="row g-5 mb-5">
+					<div class="col-lg-4">
+						<div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Durian<span>.</span></a></div>
+						<p class="mb-4">Durian by E3 DEV and siasa groups </p>
+
+						<ul class="list-unstyled custom-social">
+							<li><a href="https://web.facebook.com/"><span class="fa fa-brands fa-facebook-f"></span></a></li>
+							<li><a href="#"><span class="fa fa-brands fa-twitter"></span></a></li>
+							<li><a href="#"><span class="fa fa-brands fa-instagram"></span></a></li>
+						</ul>
+					</div>
+
+					<div class="col-lg-8">
+						<div class="row links-wrap">
+							<div class="col-6 col-sm-6 col-md-3">
+								<ul class="list-unstyled">
+									<li><a href="/aboutus">About us</a></li>
+									<li><a href="/help">Help</a></li>
+									<li><a href="/contact_us">Contact_us</a></li>
+								</ul>
+							</div>
+
+							<div class="col-6 col-sm-6 col-md-3">
+								<ul class="list-unstyled">
+									<li><a href="/account">Account</a></li>
+									<li><a href="/login">Login</a></li>
+									<li><a href="/signup">Sign Up</a></li>
+								</ul>
+							</div>
+
+							<div class="col-6 col-sm-6 col-md-3">
+								<ul class="list-unstyled">
+									<li><a href="/product">product</a></li>
+									<li><a href="/category">Category</a></li>
+									<li><a href="/promotion">Promotion</a></li>
+								</ul>
+							</div>
+
+							<div class="col-6 col-sm-6 col-md-3">
+								<ul class="list-unstyled">
+									<li><a href="/cart">Cart</a></li>
+									<li><a href="/order">Order</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="border-top copyright">
+					<div class="row pt-4">
+						<div class="col-lg-6">
+							<p class="mb-2 text-center text-lg-start">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed by <a href="#">E3 DEV</a> Distributed By <a hreff="https://themewagon.com">siasa groups</a>  </p>
+						</div>
+
+						<div class="col-lg-6 text-center text-lg-end">
+							<ul class="list-unstyled d-inline-flex ms-auto">
+								<li class="me-4"><a href="#">Terms &amp; Conditions</a></li>
+								<li><a href="#">Privacy Policy</a></li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</footer>
+		<!-- End Footer Section -->	
+
+
+		<script>
+				// เลือกอิลิเมนต์ที่มีคลาส "product-price"
+				var productPriceElements = document.querySelectorAll('.product-price');
+
+				// วนลูปผ่านทุกอิลิเมนต์ที่เลือก
+				productPriceElements.forEach(function(element) {
+					// ดึงข้อความที่อยู่ในอิลิเมนต์
+					var priceText = element.innerText;
+
+					// แปลงข้อความเป็นตัวเลข
+					var price = parseFloat(priceText.replace('฿', '').replace(',', ''));
+
+					// รูปแบบข้อความใหม่ที่มีคอมม่า
+					var formattedPrice = '฿' + price.toLocaleString();
+
+					// แสดงราคาที่มีรูปแบบใหม่ในอิลิเมนต์
+					element.innerText = formattedPrice;
+				});
+
+		</script>
+
+		<script>
+
+			const params = new URLSearchParams(window.location.search);
+			const act = params.get('act');
+
+			const Toast = Swal.mixin({
+				toast: true,
+				position: 'top-end',
+				showConfirmButton: false,
+				timer: 4000,
+				timerProgressBar: true,
+				didOpen: (toast) => {
+					toast.addEventListener('mouseenter', Swal.stopTimer)
+					toast.addEventListener('mouseleave', Swal.resumeTimer)
+				}
+				})
+			
+			if (act === 'LoginSuccess') {
+				Toast.fire({
+					icon: 'success',
+					title: 'Login Success'
+					})
+			}else if (act === 'LogoutSuccess') {
+				Toast.fire({
+					icon: 'success',
+					title: 'Logout Success'
+					})
+			}
+			
+
+		</script>
+
+		<script src="../static/js/bootstrap.bundle.min.js"></script>
+		<script src="../static/js/tiny-slider.js"></scrip>
+		<script src="../static/js/custom.js"></script>
+	</body>
+
+</html>
